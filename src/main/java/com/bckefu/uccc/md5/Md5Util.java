@@ -1,6 +1,7 @@
 package com.bckefu.uccc.md5;
 
-import org.springframework.util.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.Md5Crypt;
 
 /**
  * @Author caoliang1918@aliyun.com
@@ -14,6 +15,11 @@ public class Md5Util {
      * @return
      */
     public static String encrypt(String content){
-        return DigestUtils.md5DigestAsHex(content.getBytes());
+        return DigestUtils.md5Hex(content.getBytes());
     }
+    public static String encrypt16(String content){
+        String str = DigestUtils.md5Hex(content.getBytes());
+        return str.substring(8,24);
+    }
+
 }

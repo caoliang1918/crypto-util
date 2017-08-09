@@ -9,16 +9,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+
 
 import java.io.UnsupportedEncodingException;
 import java.security.SignatureException;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@SpringBootConfiguration
+
 public class BckefuCryptoApplicationTests {
 	Logger logger = LoggerFactory.getLogger(BckefuCryptoApplicationTests.class);
 	String data = "caoliang";
@@ -26,7 +22,7 @@ public class BckefuCryptoApplicationTests {
 	@Test
 	public void hMacTest() throws SignatureException {
 		String encrypt = HmacUtil.hmacSha256Hex(data , "key");
-		logger.info("hmac256 加密:{}",encrypt);
+		System.out.println(encrypt);
 	}
 	@Test
 	public void shaTest() throws UnsupportedEncodingException {
@@ -38,8 +34,8 @@ public class BckefuCryptoApplicationTests {
 	}
 	@Test
 	public void md5Test(){
-		String encrypt2 = Md5Util.encrypt(data);
-		logger.info("MD5 加密:{}",encrypt2);
+		String encrypt2 = Md5Util.encrypt16(data);
+		System.out.println(encrypt2);
 	}
 
 	@Test

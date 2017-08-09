@@ -29,7 +29,7 @@ public class RsaUtil {
 
 
     public static Map<String , String> generateKeyPair(){
-        Map<String , String> map = new HashMap<>();
+        Map<String , String> map = new HashMap<String , String>();
         //创建随机数源
         SecureRandom secureRandom = new SecureRandom();
         try {
