@@ -38,7 +38,7 @@ public class AesUtil {
         try {
             Cipher cipher = Cipher.getInstance(cipherType);
             SecretKeySpec secretKeySpec = new SecretKeySpec(password.getBytes(), CipherType.AES_ALGORITHM);
-            if(cipherType.contains("CBC")){
+            if(!cipherType.contains("ECB")){
                 IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
                 cipher.init(Cipher.ENCRYPT_MODE , secretKeySpec, ivParameterSpec);
             }else {
@@ -67,7 +67,7 @@ public class AesUtil {
         try {
             Cipher cipher = Cipher.getInstance(cipherType);
             SecretKeySpec secretKeySpec = new SecretKeySpec(password.getBytes(), CipherType.AES_ALGORITHM);
-            if(cipherType.contains("CBC")){
+            if(!cipherType.contains("ECB")){
                 IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
                 cipher.init(Cipher.DECRYPT_MODE , secretKeySpec, ivParameterSpec);
             }else {
@@ -102,5 +102,13 @@ public class AesUtil {
      */
     public static String decryptAES(String decryptCode, String password , String iv) {
         return decryptAES(decryptCode , password , iv , CipherType.AES_CBC_PKC5PADDING);
+    }
+
+    public static String encryptAES(String data, String password){
+        return encryptAES(data ,password , null  , CipherType.AES_ECB_PKC5PADDING);
+    }
+
+    public static String decryptAES(String decryptCode, String password) {
+        return decryptAES(decryptCode , password , null , CipherType.AES_ECB_PKC5PADDING);
     }
 }

@@ -2,8 +2,6 @@ package com.bckefu.uccc.rsa;
 
 import com.bckefu.uccc.CipherType;
 import org.apache.commons.codec.binary.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -24,7 +22,6 @@ import java.util.Map;
  * RSA是第一个能同时用于加密和数宇签名的算法
  */
 public class RsaUtil {
-    static Logger logger = LoggerFactory.getLogger(RsaUtil.class);
     public final static int KEY_SIZE = 2048;
 
 

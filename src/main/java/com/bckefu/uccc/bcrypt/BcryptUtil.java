@@ -8,14 +8,14 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
  */
 public class BcryptUtil {
 
-    int ROUNDS = 4;
+    final static int ROUNDS = 4;
 
     /**
      *
      * @param data
      * @return
      */
-    public String encrypt(String data){
+    public static String encrypt(String data){
         return BCrypt.hashpw(ShaUtil.shaByApache(data), BCrypt.gensalt(ROUNDS));
     }
 
@@ -25,7 +25,7 @@ public class BcryptUtil {
      * @param hashed
      * @return
      */
-        public boolean checkPwd(String decryptCode, String hashed){
+        public static boolean checkPwd(String decryptCode, String hashed){
         return BCrypt.checkpw(ShaUtil.shaByApache(decryptCode) , hashed);
     }
 }
