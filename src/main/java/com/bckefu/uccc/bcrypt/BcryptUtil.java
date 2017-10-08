@@ -25,7 +25,7 @@ public class BcryptUtil {
      * @param hashed
      * @return
      */
-        public static boolean checkPwd(String decryptCode, String hashed){
+    public static boolean checkPwd(String decryptCode, String hashed){
         return BCrypt.checkpw(ShaUtil.shaByApache(decryptCode) , hashed);
     }
 }
