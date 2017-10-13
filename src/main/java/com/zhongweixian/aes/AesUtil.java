@@ -1,7 +1,7 @@
-package com.bckefu.uccc.aes;
+package com.zhongweixian.aes;
 
 
-import com.bckefu.uccc.CipherType;
+import com.zhongweixian.CipherType;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 

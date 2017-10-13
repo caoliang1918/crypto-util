@@ -1,6 +1,6 @@
-package com.bckefu.uccc.bcrypt;
+package com.zhongweixian.bcrypt;
 
-import com.bckefu.uccc.sha.ShaUtil;
+import com.zhongweixian.sha.ShaUtil;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /**

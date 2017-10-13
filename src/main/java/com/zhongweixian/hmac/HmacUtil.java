@@ -1,6 +1,6 @@
-package com.bckefu.uccc.hmac;
+package com.zhongweixian.hmac;
 
-import com.bckefu.uccc.CipherType;
+import com.zhongweixian.CipherType;
 import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Mac;

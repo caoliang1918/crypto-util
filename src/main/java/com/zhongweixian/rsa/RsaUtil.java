@@ -1,6 +1,6 @@
-package com.bckefu.uccc.rsa;
+package com.zhongweixian.rsa;
 
-import com.bckefu.uccc.CipherType;
+import com.zhongweixian.CipherType;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.BadPaddingException;

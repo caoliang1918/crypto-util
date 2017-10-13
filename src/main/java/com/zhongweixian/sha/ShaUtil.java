@@ -1,6 +1,6 @@
-package com.bckefu.uccc.sha;
+package com.zhongweixian.sha;
 
-import com.bckefu.uccc.CipherType;
+import com.zhongweixian.CipherType;
 import org.apache.commons.codec.binary.Hex;
 
 import java.io.UnsupportedEncodingException;

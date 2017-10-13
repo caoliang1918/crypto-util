@@ -1,4 +1,4 @@
-package com.bckefu.uccc.md5;
+package com.zhongweixian.md5;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.codec.digest.Md5Crypt;

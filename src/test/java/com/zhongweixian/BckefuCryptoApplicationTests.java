@@ -1,12 +1,11 @@
-package com.bckefu.uccc;
+package com.zhongweixian;
 
-import com.bckefu.uccc.aes.AesUtil;
-import com.bckefu.uccc.hmac.HmacUtil;
-import com.bckefu.uccc.md5.Md5Util;
-import com.bckefu.uccc.rsa.RsaUtil;
-import com.bckefu.uccc.sha.ShaUtil;
+import com.zhongweixian.aes.AesUtil;
+import com.zhongweixian.hmac.HmacUtil;
+import com.zhongweixian.md5.Md5Util;
+import com.zhongweixian.rsa.RsaUtil;
+import com.zhongweixian.sha.ShaUtil;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
