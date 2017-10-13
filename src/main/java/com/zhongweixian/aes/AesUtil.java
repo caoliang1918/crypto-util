@@ -38,7 +38,10 @@ public class AesUtil {
         try {
             Cipher cipher = Cipher.getInstance(cipherType);
             SecretKeySpec secretKeySpec = new SecretKeySpec(password.getBytes(), CipherType.AES_ALGORITHM);
-            if(!cipherType.contains("CBC")){
+            if(!cipherType.contains("ECB")){
+                if(iv==null || iv.length() != 16 ){
+                    throw new IllegalArgumentException("iv偏移量必须是16位");
+                }
                 IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
                 cipher.init(Cipher.ENCRYPT_MODE , secretKeySpec, ivParameterSpec);
             }else {
@@ -67,7 +70,10 @@ public class AesUtil {
         try {
             Cipher cipher = Cipher.getInstance(cipherType);
             SecretKeySpec secretKeySpec = new SecretKeySpec(password.getBytes(), CipherType.AES_ALGORITHM);
-            if(!cipherType.contains("CBC")){
+            if(!cipherType.contains("ECB")){
+                if(iv==null || iv.length() != 16 ){
+                    throw new IllegalArgumentException("iv偏移量必须是16位");
+                }
                 IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
                 cipher.init(Cipher.DECRYPT_MODE , secretKeySpec, ivParameterSpec);
             }else {
