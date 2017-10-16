@@ -9,9 +9,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.SignatureException;
+import java.security.spec.InvalidKeySpecException;
 
 
 public class BckefuCryptoApplicationTests {
@@ -24,7 +25,7 @@ public class BckefuCryptoApplicationTests {
 		System.out.println(encrypt);
 	}
 	@Test
-	public void shaTest() throws UnsupportedEncodingException {
+	public void shaTest(){
 
 		String encrypt2 = ShaUtil.shaByApache(data);
 		String encrypt3 = ShaUtil.shaByJDK(data);
@@ -40,19 +41,42 @@ public class BckefuCryptoApplicationTests {
 	@Test
 	public void aesTest(){
 		String content = "18612983191";
-		logger.info("加密前：{}" , content);
+		logger.debug("加密前：{}" , content);
 		String encryptResult = AesUtil.encryptAES(content, AesUtil.KEY , AesUtil.IV);
-		logger.info("加密后 : {}" , encryptResult);
+		logger.debug("加密后 : {}" , encryptResult);
 		String decryptResult = AesUtil.decryptAES(encryptResult, AesUtil.KEY , AesUtil.IV);
 		logger.info("解密后：{}" , decryptResult);
 	}
 	@Test
-	public void rsaTest(){
+	public void rsaTest() throws InvalidKeySpecException, NoSuchAlgorithmException {
+		logger.info("{}" ,RsaUtil.generateKeyPair().toString());
 
 
-		String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAviSuCu4Yg/WAyjp06qiaE/ioI2M/ACT9UTUVxWtM7IZlXMQZPjLn0H1x0zmJ/VLIhnBliyb06QLvtrrBFRt4jnOJR5LjoTg/g8XYdVXN6a+XFjqFvOUPgzZ7OdywOoXxiO+M7WrvT0XgqyBqCnDADpY1eucDqfIDYYOBHKbtMkh0N4ZVBcfULb1Sm+Q7ed+jUa8eXPQPhMrWvhQkIeZJh+hCIrNjXUxyfZPh1tSvqoJYArbyHZs8LnbUtjIQCx9OlR9+xJTx3L9h89I4D+hqA4CZqxUzfibsu5XgYKnoSri2OCR2FefSfYlCd8Fysp0wET/r1L141qnhoMQtrUs8jwIDAQAB";
-		String privateKey = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+JK4K7hiD9YDKOnTqqJoT+KgjYz8AJP1RNRXFa0zshmVcxBk+MufQfXHTOYn9UsiGcGWLJvTpAu+2usEVG3iOc4lHkuOhOD+Dxdh1Vc3pr5cWOoW85Q+DNns53LA6hfGI74ztau9PReCrIGoKcMAOljV65wOp8gNhg4Ecpu0ySHQ3hlUFx9QtvVKb5Dt536NRrx5c9A+Eyta+FCQh5kmH6EIis2NdTHJ9k+HW1K+qglgCtvIdmzwudtS2MhALH06VH37ElPHcv2Hz0jgP6GoDgJmrFTN+Juy7leBgqehKuLY4JHYV59J9iUJ3wXKynTARP+vUvXjWqeGgxC2tSzyPAgMBAAECggEAMhFkhtpFOFIoFJgp+zRkRgf+9jqG91nGHmEVF4P2oH2PKUs1vmwXII43r8AB9uOai9QC2Q5sBQNR7dLlTtKJ/zCrIF6sc+JkzyUEp3jtnLAw35iPaLsER6/L6OOUwARPIpi5ijbTRxOGYmlJovAnkm+5K2CzVUe13jKLh+joool/ReZk0Rsr4tVLSLmvzDA/sRwYun0x0+jl5EZSQfwsVyN9bD5rY/In/EuvH9yj5R4lPe+mimF4Os6IgTsP5LzqDTAiFx5NNioFRJ2SkcTmM0CZQeMIBuvvF2HCtJlDEfCytD7wYup3GBvar2ccOe9T3YhJdsj5bfAJHVJtamxQwQKBgQDnYReMMzqAh2HOFL8QymzOjImsrOz6NCZatq38TU1hSe9PK+C0sFGhkd788y4AuURS1Btu4i7F+hOYcj1z3L+NSPGE3yLHVjakMrrNbA9rwG/t7oU0cG7d0WWM9bcTQiCSNcUyt69BGH3dZdqee1tITzqghE7+gh9RYiVcI6/8LwKBgQDSYEuWFLMUsR/s7unSHCucuEXjwbYrvknv8Y81sjvrWktNXrJoYlbGy/7HYA6lxzchtSxhPuUSjopwQ5scgMhqf8Gxz7jsDN9ak2dErF7cWRFYfh6aKhkbEw9oG01jIX15MK0TbMafoJslDhPQF1cP9i0+ZGg+gPbASdeUVRTNoQKBgQCOjwDOLgYeiMtXCOtL8hymCmsNDCKaaiUzgRijuhEyHzamJhe13Gj/TnwAh+hRI9UX333jjNJawqDuLXz1dQ5Eg6vjPQQVo2XZNzRnOuwpbJDKHUrPK3Lzkn+qIP6ii/y7eQu+GvSM/AUYsxfGy6RLYh1yJvLw1sVrBDiWk5prmwKBgFvgrmI3XBa3XKgPl5KptupVGEDmAveLvaLLLq5WzxB0eNqrduNbv2ZHBVhxvTPtk0hnZaB65XR7SD7LZ9zE6cKJVUCg5bRB0vIt2jYFydAWHhs1yYuuwxQt+NaQxfV7VN8uwQfww7ZHYDqIsWJ6Lw3Lh+rt0xEpJZrJJRulJNbBAoGBAK1OEnfBpSB99N8gdhp+ZGLsDfwFCQ2Cd4Jpsd4hxdwbXevNuA1OiE20sHPuKqEqfOKocgTMobCwbSfnymatRydVoeUumkEc4Ja+XDgH+P1eXQLdIuRCwh0AXl+vkuOCBDMw367Zp/j6vwPlNKh9ZmOBPwhV0Syv2Z8uGkTZ6g+f";
+		String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCdnu22ITZvmuc5kdhO5oh650tz\n" +
+				"taBxNvVVfYvVIBkAfjvItSmQxcYBgS8kln25pauTpOAfKxG5rkorfkdNX9PA5Ctq\n" +
+				"0C8itYEyob8DV16kn2r5IOkn/eA4z4MnbJnhkMyAsaX5Weu/cuGx3FCFSiUct3j7\n" +
+				"ym5JqrUY0akpIGOxTwIDAQAB";
+		String privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJ2e7bYhNm+a5zmR\n" +
+				"2E7miHrnS3O1oHE29VV9i9UgGQB+O8i1KZDFxgGBLySWfbmlq5Ok4B8rEbmuSit+\n" +
+				"R01f08DkK2rQLyK1gTKhvwNXXqSfavkg6Sf94DjPgydsmeGQzICxpflZ679y4bHc\n" +
+				"UIVKJRy3ePvKbkmqtRjRqSkgY7FPAgMBAAECgYAvgxeuneZV0ADBJshoSC99tLjW\n" +
+				"wToCxok/Yt/Ct7Exp9uHjaxg2mzsSS+XvNFbI6hLkhiI7KekK/hpkeAWX7tpYR5r\n" +
+				"6V7ZM5z4llO9k0hWBuLZa8Bzz6kxIEKO1yWlMQClILS4mVmF0v4x0niwVkBV/QD4\n" +
+				"0Du9WCATHaaaTk+M0QJBANnIYnAhA7ptVJw4Ckl0FFEqbPohpaG4rrQmtwRsn68X\n" +
+				"Z/q6SqcKU7XGfrn8fM7GnD/W5DxJycpot2g1Rd62/ykCQQC5R9hJuvhliA2C81/A\n" +
+				"im6E893ZPGB4rTYxcmch3oqi+esy6W/FKew7HekXl3+0AMtGFFazVwf4fKYSJzzA\n" +
+				"MVO3AkBYwxJT7zDMz/i3PyP6MiSBvE/0VrhiRJp39HuNgxRGUbzgdQMuN8hMgx1t\n" +
+				"gloAEPToFBar98sWAz4Va/kRP/aZAkEApBu+t4+j9EpNrW9joGb8/UYDeibATCMf\n" +
+				"nSx3rMgwg6pZaP7awQgg9TvI+dx2gDkz0x6wrKippq7BadLXPGR0gQJAMmKPgTug\n" +
+				"h1KhvmAyb5NODYUj6ef4euAoZe7tAoz9e0uBra15hrfIcYK13rS0aM4UGGzXDVra\n" +
+				"1SjNGiIXfrZcow==";
 
+
+		PrivateKey privateKey1 = RsaUtil.getPrivateKey(privateKey);
+
+		logger.info("{}",privateKey1.getAlgorithm());
+		logger.info("{}",privateKey1.getFormat());
+		logger.info("{}",privateKey1.getEncoded());
 
 		logger.info("公钥加密——私钥解密");
 		String source = "caoliangcaoliangcaoliang";
@@ -60,9 +84,8 @@ public class BckefuCryptoApplicationTests {
 		String aData = RsaUtil.encrypt(source , publicKey );
 		logger.info("加密后文字：{}" ,  aData);
 		String dData = RsaUtil.decrypt(aData , privateKey );
-		logger.info("解密后文字: {}" , dData);
+		logger.debug("解密后文字: {}" , dData);
 
-		logger.info("{}" ,RsaUtil.generateKeyPair().toString());
 
 	}
 

@@ -4,7 +4,9 @@ import com.zhongweixian.sha.ShaUtil;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /**
- * Created by caoliang on 2017/8/4.
+ * @Author caoliang1918@aliyun.com
+ *
+ * Date 2017/8/4 22:09
  */
 public class BcryptUtil {
 

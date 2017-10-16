@@ -5,6 +5,7 @@ import org.apache.commons.codec.digest.Md5Crypt;
 
 /**
  * @Author caoliang1918@aliyun.com
+ *
  * Date 2017/8/5:23:03
  */
 public class Md5Util {

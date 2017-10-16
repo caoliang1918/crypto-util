@@ -18,13 +18,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by caoliang on 2017/8/7.
- * RSA是第一个能同时用于加密和数宇签名的算法
+ * @Author caoliang1918@aliyun.com
+ *
+ * Date 2017/8/5 23:48
+ *
+ * RSA是第一个能同时用于加密和数宇签名的算法,java
  */
 public class RsaUtil {
     public final static int KEY_SIZE = 2048;
 
 
+    /**
+     * 生产秘钥对
+     * @return
+     */
     public static Map<String , String> generateKeyPair(){
         Map<String , String> map = new HashMap<String , String>();
         //创建随机数源
@@ -66,7 +73,7 @@ public class RsaUtil {
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
-    private static PublicKey getPublicKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static PublicKey getPublicKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
         byte[] keyBytes = Base64.decodeBase64(key);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(CipherType.RSA);
@@ -81,7 +88,7 @@ public class RsaUtil {
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
-    private static PrivateKey getPrivateKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static PrivateKey getPrivateKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
         byte[] keyBytes = Base64.decodeBase64(key);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(CipherType.RSA);
@@ -179,7 +186,7 @@ public class RsaUtil {
 
 
     /**
-     * 签名
+     * 私钥签名
      * @param plainText
      * @param privateKeyString
      * @return
@@ -204,7 +211,7 @@ public class RsaUtil {
         return null;
     }
     /**
-     * 验证签名
+     * 公钥验证签名
      * @param encryptString
      * @param signatureString
      * @param publicKeyString

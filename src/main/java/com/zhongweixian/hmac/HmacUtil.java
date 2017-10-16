@@ -8,7 +8,9 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.SignatureException;
 
 /**
- * Created by caoliang on 2017/8/4.
+ * @Author caoliang1918@aliyun.com
+ *
+ * Date 2017/8/4.
  */
 public class HmacUtil {
 
