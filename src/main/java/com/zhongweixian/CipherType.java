@@ -34,5 +34,8 @@ public class CipherType {
     //签名算法
     public final static String SHA256_RSA = "SHA256withRSA";
 
+    //随机算法
+    public final static String RANDOM_NUMBER_ALGORITHM = "SHA1PRNG";
+
 
 }
