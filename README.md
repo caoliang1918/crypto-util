@@ -1,5 +1,5 @@
 # crypto-util
- crypto-util集成了AES、RSA、Bcrypt等常见的加密算法,对签名算法后续会更新
+ crypto-util集成了AES、RSA、Bcrypt等常见的加密算法
 
 ## 依赖
 ```xml
@@ -20,4 +20,3 @@
 </dependency>
  ```
   
-## FAQ（暂存）
