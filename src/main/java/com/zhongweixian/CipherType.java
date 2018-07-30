@@ -27,15 +27,11 @@ public class CipherType {
     //RSA
     public final static String RSA = "RSA";
 
-    //加密算法
+    //RSA加密算法
     public final static String RSA_ECB_PSCS1PADDING = "RSA/ECB/PKCS1Padding";
-    public final static String RSA_CBC_PSCS1PADDING = "RSA/CBC/PKCS1Padding";
 
     //签名算法
     public final static String SHA256_RSA = "SHA256withRSA";
-
-    //随机算法
-    public final static String RANDOM_NUMBER_ALGORITHM = "SHA1PRNG";
 
 
 }

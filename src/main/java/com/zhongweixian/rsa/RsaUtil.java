@@ -25,7 +25,7 @@ import java.util.Map;
  * RSA是第一个能同时用于加密和数宇签名的算法,java
  */
 public class RsaUtil {
-    public final static int KEY_SIZE = 2048;
+    public final static int KEY_SIZE = 4096;
 
 
     /**
@@ -164,7 +164,7 @@ public class RsaUtil {
     public static String decrypt(String encryptCode , String privateKey , String cipherType){
         Cipher cipher = null;
         try {
-            cipher = Cipher.getInstance(CipherType.RSA_ECB_PSCS1PADDING);
+            cipher = Cipher.getInstance(cipherType);
             cipher.init(Cipher.DECRYPT_MODE, getPrivateKey(privateKey));
             byte[] deBytes = cipher.doFinal(Base64.decodeBase64(encryptCode));
             return new String(deBytes);
@@ -195,7 +195,7 @@ public class RsaUtil {
         PrivateKey privateKey = null;
         try {
             privateKey = getPrivateKey(privateKeyString);
-            Signature signature = Signature.getInstance(privateKey.getAlgorithm()); //推荐SHA256withRSA
+            Signature signature = Signature.getInstance(CipherType.SHA256_RSA);
             signature.initSign(privateKey);
             signature.update(plainText.getBytes());
             return new String(Base64.encodeBase64(signature.sign()));
@@ -225,7 +225,7 @@ public class RsaUtil {
         try {
             publicKey = getPublicKey(publicKeyString);
             byte[] signatureBytes = Base64.decodeBase64(signatureString);
-            Signature signature = Signature.getInstance(publicKey.getAlgorithm());//SHA256withRSA
+            Signature signature = Signature.getInstance(CipherType.SHA256_RSA);
             signature.initVerify(publicKey);
             signature.update(encryptString.getBytes("UTF-8"));
             return signature.verify(signatureBytes);
